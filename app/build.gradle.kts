@@ -105,5 +105,6 @@ dependencies {
     //Coil
     implementation("io.coil-kt:coil:2.3.0")
     
+    implementation("androidx.metrics:metrics-performance:1.0.0-alpha03")
     
 }
