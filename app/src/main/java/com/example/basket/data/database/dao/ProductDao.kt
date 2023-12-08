@@ -8,6 +8,27 @@ import androidx.room.Query
 import com.example.basket.domain.model.Product
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Interface que define métodos de acesso a dados (DAO - Data Access Object) para a entidade Product,
+ *  * fornecendo métodos abstratos para realizar operações CRUD (Create, Read, Update, Delete)
+ * no banco de dados relacionado à entidade Product.
+ *
+ * - @Query: Método para buscar todos os produtos no banco de dados. Retorna um Flow observável
+ *   que emite a lista de produtos sempre que ela é modificada.
+ *
+ * - @Insert: Método para inserir um produto no banco de dados. A anotação @onConflict é usada para
+ *   especificar a estratégia de conflito, REPLACE neste caso, o que significa que, se houver um
+ *   conflito de chave primária, o produto existente será substituído pelo novo.
+ *
+ * - @Delete: Método para excluir um produto do banco de dados.
+ *
+ * - @Query: Método para encontrar um produto pelo ID no banco de dados. Retorna um Flow observável
+ *   que emite o produto sempre que ele é modificado.
+ *
+ * - @Query: Método para encontrar todos os produtos associados a um determinado usuário pelo ID do usuário.
+ *   Retorna um Flow observável que emite a lista de produtos sempre que ela é modificada.
+ */
+
 @Dao
 interface ProductDao {
     

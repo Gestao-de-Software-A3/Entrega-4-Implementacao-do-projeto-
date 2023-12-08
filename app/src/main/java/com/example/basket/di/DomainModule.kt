@@ -15,14 +15,23 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
+/**
+ * Módulo responsável por configurar a injeção de dependência para casos de uso (use cases)
+ * relacionados a usuários e produtos.
+ */
+
 object DomainModule {
     
+    
+    // Função para carregar os módulos Koin relacionados a casos de uso de usuários e produtos.
     fun load() {
         loadKoinModules(useCasesModule())
     }
     
+    //Módulo Koin para a injeção de dependência de casos de uso relacionados a usuários e produtos.
     private fun useCasesModule(): Module {
         return module {
+            // Casos de uso relacionados a usuários
             factory { AuthenticateUserUseCase(userRepository = get()) }
             factory { AddUserUseCase(userRepository = get()) }
             factory { GetUserByIdUseCase(userRepository = get()) }
@@ -33,6 +42,7 @@ object DomainModule {
                 getUserByIdUseCase = get(),
                 getAllUsersUseCase = get()
             ) }
+            // Casos de uso relacionados a produtos
             factory { AddProductUseCase(productRepository = get()) }
             factory { DeleteProductUseCase(productRepository = get()) }
             factory { FindProductByIdUseCase(productRepository = get()) }

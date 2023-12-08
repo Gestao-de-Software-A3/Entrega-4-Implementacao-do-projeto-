@@ -11,6 +11,7 @@ import java.security.MessageDigest
 import java.text.NumberFormat
 import java.util.Locale
 
+// Função de extensão para facilitar a navegação entre atividades
 fun Context.toActivity(clazz: Class<*>, intent: Intent.() -> Unit = {}) {
     Intent(this, clazz)
         .apply {
@@ -19,6 +20,7 @@ fun Context.toActivity(clazz: Class<*>, intent: Intent.() -> Unit = {}) {
         }
 }
 
+// Função para gerar um hash de uma String usando o algoritmo SHA-256
 fun String.toHash(
     code: String = "SHA-256"
 ): String {
@@ -30,16 +32,20 @@ fun String.toHash(
         })
 }
 
+// Função de extensão para exibir um Toast no contexto atual
 fun Context.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT)
         .show()
 }
 
+// Função de extensão para formatar um BigDecimal como moeda brasileira
 fun BigDecimal.formatToBrazilianCurrency(): String {
     
     val formatter = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
     return formatter.format(this)
 }
+
+// Função de extensão para carregar uma imagem em um ImageView usando a biblioteca Coil
 fun ImageView.loadImage(url: String? = null, fallback: Int = R.drawable.placeholder) {
     
     load(url) {

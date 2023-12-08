@@ -20,17 +20,35 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import java.math.BigDecimal
 
+/**
+ * Atividade responsável pelo formulário de produtos, permitindo a adição ou edição de produtos.
+ *
+ * @property productUseCases Instâncias dos casos de uso relacionados a produtos.
+ * @property binding Objeto de ligação para a interface do usuário usando View Binding.
+ * @property url URL da imagem do produto.
+ * @property productId ID do produto em edição, se aplicável.
+ */
 class ProductFormActivity : BaseUserActivity() {
     
-    //(private val productUseCases: ProductUseCases)
+    // Instâncias dos casos de uso relacionados a produtos
     private val productUseCases: ProductUseCases by inject()
     
+    // Objeto de ligação para a interface do usuário usando View Binding
     private val binding by lazy {
         ProductFormActivityBinding.inflate(layoutInflater)
     }
+    
+    // URL da imagem do produto
     private var url: String? = null
+    
+    // ID do produto em edição, se aplicável
     private var productId = 0L
     
+    /**
+     * Chamado quando a atividade está sendo criada.
+     * Configura a interface do usuário, incluindo os botões de salvar e ação para a imagem do produto.
+     * Carrega as informações do produto, se aplicável.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSaveButton()
@@ -46,11 +64,18 @@ class ProductFormActivity : BaseUserActivity() {
         loadProduct()
     }
     
+    /**
+     * Chamado quando a atividade está retomando.
+     * Atualiza as informações do produto ao retomar a atividade.
+     */
     override fun onResume() {
         super.onResume()
         searchProduct()
     }
     
+    /**
+     * Busca as informações do produto pelo ID e preenche o formulário com os detalhes do produto.
+     */
     private fun searchProduct() {
         lifecycleScope.launch {
             productUseCases.findProductByIdUseCase(productId).collect { product ->
@@ -67,6 +92,9 @@ class ProductFormActivity : BaseUserActivity() {
         }
     }
     
+    /**
+     * Define o campo de usuário no formulário, preenchendo-o com uma lista de usuários disponíveis.
+     */
     private fun setUserField() {
         lifecycleScope.launch {
             allUsers().invoke().map { users ->
@@ -77,6 +105,9 @@ class ProductFormActivity : BaseUserActivity() {
         }
     }
     
+    /**
+     * Configura um adaptador e um ouvinte para o campo de usuário no formulário.
+     */
     private fun setAutoCompleteTextView(users: List<String>) {
         val userField = binding.productFormUser
         val adapter = ArrayAdapter(
@@ -92,6 +123,9 @@ class ProductFormActivity : BaseUserActivity() {
         }
     }
     
+    /**
+     * Valida se o usuário existente no campo de usuário faz parte da lista de usuários disponíveis.
+     */
     private fun existingUser(users: List<String>): Boolean {
         val userField = binding.productFormUser
         val userId = userField.text.toString()
@@ -102,10 +136,18 @@ class ProductFormActivity : BaseUserActivity() {
         return true
     }
     
+    /**
+     * Carrega o ID do produto da intenção.
+     */
     private fun loadProduct() {
         productId = intent.getLongExtra(PRODUCT_KEY_ID, 0L)
     }
     
+    /**
+     * Preenche os campos do formulário com os detalhes do produto.
+     *
+     * @param product Produto a ser exibido no formulário.
+     */
     private fun fillFields(product: Product) {
         url = product.image
         with(binding) {
@@ -116,6 +158,9 @@ class ProductFormActivity : BaseUserActivity() {
         }
     }
     
+    /**
+     * Configura o botão de salvar no formulário.
+     */
     private fun setSaveButton() {
         val saveButton = binding.productFormSaveButton
         
@@ -126,6 +171,9 @@ class ProductFormActivity : BaseUserActivity() {
         }
     }
     
+    /**
+     * Salva as informações do produto no banco de dados com base nos campos do formulário.
+     */
     private suspend fun saveProduct() {
         user.value?.let { user ->
             try {
@@ -139,6 +187,12 @@ class ProductFormActivity : BaseUserActivity() {
         }
     }
     
+    /**
+     * Define o usuário associado ao produto com base nas regras de negócios.
+     *
+     * @param user Usuário atualmente logado.
+     * @return ID do usuário associado ao produto.
+     */
     private suspend fun defineUser(user: User): String = productUseCases
         .findProductByIdUseCase(productId)
         .first()?.let { product ->
@@ -157,6 +211,12 @@ class ProductFormActivity : BaseUserActivity() {
             null
         } ?: user.id
     
+    /**
+     * Cria uma instância de produto com base nos campos do formulário.
+     *
+     * @param userId ID do usuário associado ao produto.
+     * @return Nova instância de produto.
+     */
     private fun createProduct(userId: String): Product {
         val nameField = binding.productFormName
         val name = nameField.text.toString()

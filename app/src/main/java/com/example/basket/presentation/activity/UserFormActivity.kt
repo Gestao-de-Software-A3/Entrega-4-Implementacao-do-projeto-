@@ -12,21 +12,35 @@ import com.example.basket.domain.usecases.UserUseCases
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
+/**
+ * Atividade responsável pelo formulário de registro de novos usuários.
+ *
+ * @property userUseCases Instâncias dos casos de uso relacionados a usuários.
+ * @property binding Objeto de ligação para a interface do usuário usando View Binding.
+ */
 class UserFormActivity : AppCompatActivity() {
     
-    //(private val userUseCases: UserUseCases)
+    // Instâncias dos casos de uso relacionados a usuários
     private val userUseCases: UserUseCases by inject()
     
+    // Objeto de ligação para a interface do usuário usando View Binding
     private val binding by lazy {
         UserFormActivityBinding.inflate(layoutInflater)
     }
     
+    /**
+     * Chamado quando a atividade está sendo criada.
+     * Configura a interface do usuário, incluindo o botão de registro e sua lógica associada.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setRegisterButton()
     }
     
+    /**
+     * Configura o botão de registro e sua ação associada.
+     */
     private fun setRegisterButton() {
         binding.formRegisterButton.setOnClickListener {
             val newUser = createUser()
@@ -34,6 +48,11 @@ class UserFormActivity : AppCompatActivity() {
         }
     }
     
+    /**
+     * Executa o processo de registro do novo usuário.
+     *
+     * @param user Novo usuário a ser registrado.
+     */
     private fun register(user: User) {
         lifecycleScope.launch {
             try {
@@ -45,10 +64,15 @@ class UserFormActivity : AppCompatActivity() {
         }
     }
     
+    /**
+     * Cria uma instância de usuário com base nos campos do formulário.
+     *
+     * @return Nova instância de usuário.
+     */
     private fun createUser(): User {
-        val user = binding.formUserField.text.toString()
+        val userId = binding.formUserField.text.toString()
         val name = binding.formUserNameField.text.toString()
         val password = binding.formPasswordField.text.toString().toHash()
-        return User(user, name, password)
+        return User(userId, name, password)
     }
 }

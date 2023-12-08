@@ -6,6 +6,8 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 import java.math.BigDecimal
 
+
+//Classe de dados (data class) que representa a entidade Product no banco de dados.
 @Entity
 @Parcelize
 data class Product(
