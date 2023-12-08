@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@drawable/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -35,6 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="@id/textInputLayout_user_form"
             app:layout_constraintStart_toStartOf="@id/textInputLayout_user_form"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_user_form">
@@ -53,6 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="@id/textInputlayout_name_form"
             app:layout_constraintStart_toStartOf="@id/textInputlayout_name_form"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_name_form">
@@ -67,9 +71,10 @@
 
         <Button
             android:id="@+id/form_register_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="136dp"
+            android:layout_height="46dp"
             android:layout_marginTop="16dp"
+            android:background="@drawable/roundstyle"
             android:text="Cadastrar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/textInputlayout_password_form"

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@drawable/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,14 +14,14 @@
 
         <ImageView
             android:id="@+id/image_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="254dp"
+            android:layout_height="243dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/login_title"
             app:layout_constraintStart_toStartOf="@+id/login_title"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.15"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:layout_constraintVertical_bias="0.226"
+            app:srcCompat="@drawable/basket" />
 
         <TextView
             android:id="@+id/login_title"
@@ -40,6 +41,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_title">
@@ -59,6 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_user">
@@ -71,16 +74,18 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <Button
             android:id="@+id/login_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="44dp"
             android:layout_marginTop="16dp"
-            android:text="Entrar"
+            android:background="@drawable/roundstyle"
+            android:text="Login"
             app:layout_constraintEnd_toEndOf="@id/textInputlayout_password"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="@id/textInputlayout_password"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_password" />
-
 
         <Button
             android:id="@+id/register_button"
@@ -88,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
-            android:text="cadastrar usuário"
+            android:text="Cadastrar"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

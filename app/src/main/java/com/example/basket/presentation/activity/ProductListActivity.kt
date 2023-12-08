@@ -1,10 +1,12 @@
 package com.example.basket.presentation.activity
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.basket.R
 import com.example.basket.core.PRODUCT_KEY_ID
@@ -67,6 +69,8 @@ class ProductListActivity : BaseUserActivity() {
         fab.setOnClickListener {
             goToProductForm()
         }
+    
+        fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.colorPrimary)))
     }
     
     private fun goToProductForm() {

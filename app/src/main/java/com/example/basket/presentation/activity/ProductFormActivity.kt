@@ -35,7 +35,7 @@ class ProductFormActivity : BaseUserActivity() {
         super.onCreate(savedInstanceState)
         setSaveButton()
         setContentView(binding.root)
-        title = "Cadastrar Pizza"
+        title = "Cadastrar Produto"
         binding.productFormImage.setOnClickListener() {
             ImageFormDialog(this)
                 .showDialog(url) { image ->
